@@ -1,0 +1,12 @@
+wait: 30
+interval: 5
+checkretry: 5
+scripts:
+  pre:
+    - service nginx stop
+    - service td-agent stop
+  check:
+    - ps aux | grep [t]d-agent && exit 1 || exit 0
+    - ps aux | grep [n]ginx && exit 1 || exit 0
+  post:
+    - shutdown -h now
